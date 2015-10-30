@@ -18,10 +18,14 @@ var y = {
 
 // have a method someone can call on it to write
 Board.prototype.write = function(arrx, arry, obj) {
-	this.gameBoard[arrx - 1][arry - 1] = obj.symbol;
-
-	this.checkLines(obj);
-	this.checkDiagonal(obj);
+	if(typeof this.gameBoard[arrx - 1][arry - 1] === 'object'){
+		console.log("Space already full with " + this.gameBoard[arrx][arry]);
+	} else {
+		this.gameBoard[arrx - 1][arry - 1] = obj;
+		console.log(this.gameBoard);
+		this.checkLines(obj);
+		this.checkDiagonal(obj);
+	}
 };
 
 Board.prototype.checkLines = function(obj){
@@ -31,17 +35,21 @@ Board.prototype.checkLines = function(obj){
 			if(j === 0 && i === 0){
 				if(board[i][j] === obj && board[i][j + 1] === obj && board[i][j + 2] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 				if(board[i][j] === obj && board[i + 1][j] === obj && board[i + 2][j] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 			} else if (i === 0 && j === 1){
 				if(board[i][j] === obj && board[i + 1][j] === obj && board[i + 2][j] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 			} else if(i === 0 && j === 2){
 				if(board[i][j] === obj && board[i + 1][j] === obj && board[i + 2][j] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 			}
 		}
@@ -55,10 +63,12 @@ Board.prototype.checkDiagonal = function(obj){
 			if(j === 0 &&  i === 0){
 				if(board[i][j] === obj && board[i + 1][j + 1] === obj && board[i + 2][j + 2] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 			} else if (j === 2 && i === 0){
 				if(board[i][j] === obj && board[i + 1][j - 1] === obj && board[i + 1][j - 1] === obj){
 					this.checkForWin(obj);
+					console.log(board);
 				}
 			}
 		}
